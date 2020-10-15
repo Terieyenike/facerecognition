@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Poppins, sans-serif;
+  /* background: #d4e076; */
+  background: -webkit-linear-gradient(right, #d4e076, #17d6cd);
+  background: -moz-linear-gradient(right, #d4e076, #17d6cd);
+  background: linear-gradient(to left, #d4e076, #17d6cd);
+}
+
+button {
+  cursor: pointer;
+}

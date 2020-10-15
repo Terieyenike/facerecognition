@@ -1,0 +1,7 @@
+.Tilt {
+  background: #d4e076;
+  background: -webkit-linear-gradient(right, #d4e076, #17d6cd);
+  background: -moz-linear-gradient(right, #d4e076, #17d6cd);
+  background: linear-gradient(to left, #d4e076, #17d6cd);
+  box-shadow: 2px 5px 10px 2px rgba(0, 0, 0, 0.5);
+}
