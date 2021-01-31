@@ -19,6 +19,6 @@ The smart brain app recognises faces of individuals or a group with the ability 
 
 Teri Eyenike
 
-Backend for [smartbrain]()
+Backend for [smartbrain](https://github.com/Terieyenike/facerecognition-backend)
 
 
