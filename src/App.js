@@ -28,7 +28,7 @@ const particlesOptions = {
 const initialState = {
   input: '',
   imageUrl: '',
-  box: {},
+  boxes: [],
   route: 'signin',
   isSignedIn: false,
   user: {
@@ -76,27 +76,28 @@ class App extends React.Component {
             })
             .catch(console.log);
         }
-        this.displayFaceBox(this.calculateFaceLocation(response));
+        this.displayFaceBox(this.calculateFaceLocations(response));
       })
       .catch((err) => console.log(err));
   };
 
-  calculateFaceLocation = (data) => {
-    const clarifaiFace =
-      data.outputs[0].data.regions[0].region_info.bounding_box;
-    const image = document.getElementById('inputimage');
-    const width = numeral(image.width).format('0, 0');
-    const height = numeral(image.height).format('0, 0');
-    return {
-      leftCol: clarifaiFace.left_col * width,
-      topRow: clarifaiFace.top_row * height,
-      rightCol: width - clarifaiFace.right_col * width,
-      bottomRow: height - clarifaiFace.bottom_row * height,
-    };
+  calculateFaceLocations = (data) => {
+    return data.outputs[0].data.regions.map((face) => {
+      const clarifaiFace = face.region_info.bounding_box;
+      const image = document.getElementById('inputimage');
+      const width = numeral(image.width).format('0, 0');
+      const height = numeral(image.height).format('0, 0');
+      return {
+        leftCol: clarifaiFace.left_col * width,
+        topRow: clarifaiFace.top_row * height,
+        rightCol: width - clarifaiFace.right_col * width,
+        bottomRow: height - clarifaiFace.bottom_row * height,
+      };
+    });
   };
 
-  displayFaceBox = (box) => {
-    this.setState({ box });
+  displayFaceBox = (boxes) => {
+    this.setState({ boxes });
   };
 
   onRouteChange = (route) => {
@@ -142,7 +143,7 @@ class App extends React.Component {
               />
               <FaceRecognition
                 imageUrl={this.state.imageUrl}
-                box={this.state.box}
+                boxes={this.state.boxes}
               />
             </div>
           ) : this.state.route === 'signin' ? (
